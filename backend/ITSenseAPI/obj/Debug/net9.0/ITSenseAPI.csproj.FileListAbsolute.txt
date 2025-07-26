@@ -162,3 +162,4 @@ C:\Users\jsegu\Downloads\PruebaITSense\backend\ITSenseAPI\obj\Debug\net9.0\refin
 C:\Users\jsegu\Downloads\PruebaITSense\backend\ITSenseAPI\obj\Debug\net9.0\ITSenseAPI.pdb
 C:\Users\jsegu\Downloads\PruebaITSense\backend\ITSenseAPI\obj\Debug\net9.0\ITSenseAPI.genruntimeconfig.cache
 C:\Users\jsegu\Downloads\PruebaITSense\backend\ITSenseAPI\obj\Debug\net9.0\ref\ITSenseAPI.dll
+C:\Users\jsegu\Downloads\PruebaITSense\backend\ITSenseAPI\obj\Debug\net9.0\ITSenseAPI.sourcelink.json

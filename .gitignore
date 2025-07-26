@@ -1,0 +1,66 @@
+# ─────────────── #
+# ARCHIVOS GENERALES
+# ─────────────── #
+
+# Archivos de sistema / entorno
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.swn
+
+# Archivos de entorno
+.env
+.env.*
+!.env.example  # conserva plantilla si existe
+
+# ─────────────── #
+# DOTNET (.NET + EF Core)
+# ─────────────── #
+
+# Ignora binarios y objetos en cualquier subdirectorio
+**/bin/
+**/obj/
+
+# Archivos compilados
+**/*.dll
+**/*.exe
+**/*.pdb
+**/*.app
+**/*.so
+**/*.dylib
+
+# Publicación y base de datos
+**/publish/
+**/*.db
+**/*.sqlite
+
+# EF Core (solo ignora lo generado)
+**/Migrations/bin/
+**/Migrations/obj/
+
+# ─────────────── #
+# JAVASCRIPT / REACT / VITE
+# ─────────────── #
+
+# node_modules en cualquier lugar
+**/node_modules/
+
+# Vite build output
+**/dist/
+**/.vite/
+
+# Test coverage
+**/coverage/
+
+# Lockfiles (ignorar si usás solo uno)
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+
+
+frontend/inventory-app/node_modules/
