@@ -105,7 +105,7 @@ Pasos:
   ```
 4. Ejecuta el servidor de desarrollo:
   ```bash
-  npm run dev
+  ng serve
   ```
 5. Abre en tu navegador:
   http://localhost:4200
