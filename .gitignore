@@ -62,5 +62,4 @@ ehthumbs.db
 **/yarn.lock
 **/pnpm-lock.yaml
 
-
-frontend/inventory-app/node_modules/
+**/.angular

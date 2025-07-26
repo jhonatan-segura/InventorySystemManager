@@ -1,0 +1,192 @@
+<div class="container mt-5">
+   <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="d-flex gap-3">
+         <button class="btn btn-outline-secondary me-2" (click)="goBack()">
+            <i class="bi bi-arrow-left-circle"></i> Volver
+         </button>
+         <h2 class="mb-0">Productos Disponibles</h2>
+      </div>
+      <button class="btn btn-success" (click)="showCreateRow = true">
+         <i class="bi bi-plus-circle me-1"></i> Crear
+      </button>
+   </div>
+
+   <table class="table table-bordered table-striped">
+      <thead class="table-dark text-center">
+         <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad en Stock</th>
+            <th>Tipo de Fabricación</th>
+            <th>Estado</th>
+            <th colspan="4">Acciones</th>
+         </tr>
+      </thead>
+      <tbody class="text-center align-middle">
+         <tr *ngIf="products.length == 0">
+            <td colspan="6">No hay datos registrados</td>
+         </tr>
+         <tr *ngIf="showCreateRow">
+            <td>Nuevo</td>
+            <td>
+               <input [(ngModel)]="newProduct.name" class="form-control" />
+            </td>
+            <td>
+               <input
+                  type="number"
+                  [(ngModel)]="newProduct.stockQuantity"
+                  class="form-control"
+               />
+            </td>
+            <td>
+               <select
+                  [(ngModel)]="newProduct.typeOfManufacturingId"
+                  class="form-select"
+               >
+                  <option
+                     *ngFor="let type of typesOfManufacturing"
+                     [value]="type.id"
+                  >
+                     {{ type.name }}
+                  </option>
+               </select>
+            </td>
+            <td>
+               <select
+                  [(ngModel)]="newProduct.productStatusId"
+                  class="form-select"
+               >
+                  <option
+                     *ngFor="let status of productStatuses"
+                     [value]="status.id"
+                  >
+                     {{ status.name }}
+                  </option>
+               </select>
+            </td>
+            <td colspan="3">
+               <button class="btn btn-success btn-sm" (click)="onCreate()">
+                  <i class="bi bi-check-circle"></i> Guardar
+               </button>
+            </td>
+         </tr>
+         <tr *ngFor="let product of products">
+            <ng-container
+               *ngIf="editProductId === product.id; else readOnlyRow"
+            >
+               <td>{{ product.id }}</td>
+               <td>
+                  <input [(ngModel)]="product.name" class="form-control" />
+               </td>
+               <td>
+                  <input
+                     type="number"
+                     [(ngModel)]="product.stockQuantity"
+                     class="form-control"
+                  />
+               </td>
+               <td>
+                  <select
+                     [(ngModel)]="product.typeOfManufacturingId"
+                     class="form-select"
+                  >
+                     <option
+                        *ngFor="let type of typesOfManufacturing"
+                        [value]="type.id"
+                     >
+                        {{ type.name }}
+                     </option>
+                  </select>
+               </td>
+               <td>
+                  <select
+                     [(ngModel)]="product.productStatusId"
+                     class="form-select"
+                  >
+                     <option
+                        *ngFor="let status of productStatuses"
+                        [value]="status.id"
+                     >
+                        {{ status.name }}
+                     </option>
+                  </select>
+               </td>
+               <td colspan="3">
+                  <div class="d-flex justify-content-around">
+                     <button
+                        class="btn btn-success btn-sm"
+                        (click)="onSaveEdit(product.id, product)"
+                     >
+                        <i class="bi bi-check-circle"></i> Guardar
+                     </button>
+                     <button
+                        class="btn btn-secondary btn-sm"
+                        (click)="cancelEdit()"
+                     >
+                        <i class="bi bi-x-circle"></i> Cancelar
+                     </button>
+                  </div>
+               </td>
+            </ng-container>
+
+            <!-- Fila en modo visual -->
+            <ng-template #readOnlyRow>
+               <td>{{ product.id }}</td>
+               <td>{{ product.name }}</td>
+               <td>{{ product.stockQuantity }}</td>
+               <td>{{ product.typeOfManufacturingName }}</td>
+               <td>{{ product.productStatusName }}</td>
+               <td style="width: 300px;">
+                  <div class="d-flex justify-content-between flex-wrap gap-2">
+                     <button
+                        class="btn btn-warning btn-sm"
+                        (click)="onEdit(product.id)"
+                        mat-raised-button
+                        matTooltip="Editar producto"
+                        matTooltipPosition="below"
+                     >
+                        <i class="bi bi-pencil-square"></i>
+                     </button>
+
+                     <button
+                        class="btn btn-danger btn-sm"
+                        (click)="onDelete(product.id)"
+                        mat-raised-button
+                        matTooltip="Eliminar producto"
+                        matTooltipPosition="below"
+                     >
+                        <i class="bi bi-trash"></i>
+                     </button>
+
+                     <button
+                        class="btn btn-secondary btn-sm"
+                        (click)="onMoveProduct(product.id)"
+                        *ngIf="
+                           product.productStatusName !== 'No Disponible' &&
+                           product.stockQuantity > 0 &&
+                           product.productStatusName !== 'Defectuoso'
+                        "
+                        mat-raised-button
+                        matTooltip="Sacar de inventario"
+                        matTooltipPosition="below"
+                     >
+                        <i class="bi bi-box-arrow-right"></i>
+                     </button>
+
+                     <button
+                        class="btn btn-secondary btn-sm"
+                        (click)="onMarkDefective(product.id)"
+                        *ngIf="product.productStatusName !== 'Defectuoso'"
+                        mat-raised-button
+                        matTooltip="Marcar como defectuoso"
+                        matTooltipPosition="below"
+                     >
+                        <i class="bi bi-exclamation-triangle"></i>
+                     </button>
+                  </div>
+               </td>
+            </ng-template>
+         </tr>
+      </tbody>
+   </table>
+</div>

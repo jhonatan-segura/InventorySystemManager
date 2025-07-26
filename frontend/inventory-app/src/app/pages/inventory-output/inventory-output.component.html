@@ -1,0 +1,46 @@
+<div class="container mt-5">
+   <div class="d-flex justify-content-start align-items-center mb-4">
+      <div class="d-flex gap-3">
+         <button class="btn btn-outline-secondary me-2" (click)="goBack()">
+            <i class="bi bi-arrow-left-circle"></i> Volver
+         </button>
+         <h2 class="mb-0">Productos Fuera de Stock</h2>
+      </div>
+   </div>
+
+   <table class="table table-bordered table-striped">
+      <thead class="table-dark text-center">
+         <tr>
+            <th>ID</th>
+            <th>ID del producto</th>
+            <th>Nombre del producto</th>
+            <th>Cantidad en Stock</th>
+            <th>Razón</th>
+            <th>Acciones</th>
+         </tr>
+      </thead>
+      <tbody class="text-center align-middle">
+         <tr *ngIf="inventoryOutputs.length == 0">
+            <td colspan="6">No hay datos registrados</td>
+         </tr>
+         <tr *ngFor="let inventoryOutput of inventoryOutputs">
+            <td>{{ inventoryOutput.id }}</td>
+            <td>{{ inventoryOutput.product.id }}</td>
+            <td>{{ inventoryOutput.product.name }}</td>
+            <td>{{ inventoryOutput.stockQuantity }}</td>
+            <td>{{ inventoryOutput.reason }}</td>
+            <td>
+               <button
+                  class="btn btn-danger btn-sm"
+                  (click)="onDelete(inventoryOutput.id)"
+                  mat-raised-button
+                  matTooltip="Eliminar producto"
+                  matTooltipPosition="below"
+               >
+                  <i class="bi bi-trash"></i>
+               </button>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
